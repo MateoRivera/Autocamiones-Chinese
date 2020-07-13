@@ -13,7 +13,15 @@ switch ($_GET['accion']) {
         break;
 
     case 'agregar':
-        $respuesta = mysqli_query($conexion, "insert into spare_registered (id, spare_part_name_es, spare_part_name_en, stock,  price_sale, purchase, weight) values ('$_POST[id]','$_POST[spare_part_name_es])','$_POST[spare_part_name_en]',$_POST[stock]),$_POST[price_sale],$_POST[purchase]),$_POST[weight])");
+        $sql="INSERT INTO spare_registered(`id`, `spare_part_name_es`, `spare_part_name_en`, `stock`, `price_sale`, `purchase`, `weight`) VALUES ('$_POST[id]','$_POST[spare_part_name_es]','$_POST[spare_part_name_en]',$_POST[stock],$_POST[price_sale],$_POST[purchase],$_POST[weight])";
+
+        $respuesta = mysqli_query($conexion, $sql);
+       /* if ($respuesta) {
+      echo "New record created successfully";
+} else {
+      echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
+      https://www.hostinger.co/tutoriales/como-usar-php-para-insertar-datos-en-mysql/
+}*/
         echo json_encode($respuesta);
         break;
 

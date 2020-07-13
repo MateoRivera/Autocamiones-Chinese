@@ -25,7 +25,7 @@
         <table class="table table-striped table-bordered table-hover" id="tablarepuestos">
           <thead>
             <tr>
-              <td>Índice</td>
+              <!--<td>Índice</td>-->
               <td>Código</td>
               <td>Nombre</td>
               <td>Name</td>
@@ -103,7 +103,7 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Peso (Libras):</label>
-                <input type="number" step="0.01" id=" weight" class="form-control" placeholder="">
+                <input type="number" step="0.01" id="weight" class="form-control" placeholder="">
               </div>
             </div>
 <!-------------------------------------------->
@@ -130,9 +130,9 @@
           },
           "columns": [
           //-------------------------------
-            {
+            /*{
               "data":"indice"
-            },
+            },*/
             {
               "data": "id"
             },
@@ -146,7 +146,7 @@
               "data": "stock"
             },
             {
-              "data": "descripcion"
+              "data": "price_sale"
             },
             {
               "data": "purchase"
@@ -168,11 +168,11 @@
             }
           ],
           "columnDefs": [{
-            targets: 8,
+            targets: 7,
             "defaultContent": "<button class='btn btn-sm btn-primary botonmodificar'>Modificar</button>",
             data: null
           }, {
-            targets: 9,
+            targets: 8,
             "defaultContent": "<button class='btn btn-sm btn-primary botonborrar'>Borrar</button>",
             data: null
           }],
@@ -192,6 +192,7 @@
         $('#ConfirmarAgregar').click(function() {
           $("#FormularioArticulo").modal('hide');
           let registro = recuperarDatosFormulario();
+          console.log(registro);
           agregarRegistro(registro);
         });
 
@@ -201,14 +202,14 @@
           modificarRegistro(registro);
         });
 
-        $('#tablaarticulos tbody').on('click', 'button.botonmodificar', function() {
+        $('#tablarepuestos tbody').on('click', 'button.botonmodificar', function() {
           $('#ConfirmarAgregar').hide();
           $('#ConfirmarModificar').show();
           let registro = tabla1.row($(this).parents('tr')).data();
           recuperarRegistro(registro.codigo);
         });
 
-        $('#tablaarticulos tbody').on('click', 'button.botonborrar', function() {
+        $('#tablarepuestos tbody').on('click', 'button.botonborrar', function() {
           if (confirm("¿Realmente quiere borrar el artículo?")) {
             let registro = tabla1.row($(this).parents('tr')).data();
             borrarRegistro(registro.codigo);
@@ -217,7 +218,7 @@
 
         // funciones que interactuan con el formulario de entrada de datos
         function limpiarFormulario() {
-          $('#Codigo').val('');
+          /*$('#Codigo').val('');*/
           $('#id').val('');
           $('#spare_part_name_es').val('');
           $('#spare_part_name_en').val('');
@@ -228,10 +229,24 @@
         }
 
         function recuperarDatosFormulario() {
+          //alert($('#spare_part_name_es').val());
           let registro = {
-            codigo: $('#Codigo').val(),
-            descripcion: $('#Descripcion').val(),
-            precio: $('#Precio').val()
+            //codigo: $('#Codigo').val(),
+            /**/
+            id: $('#id').val(),
+            spare_part_name_es: $('#spare_part_name_es').val(),
+            spare_part_name_en: $('#spare_part_name_en').val(),
+            stock: $('#stock').val(),
+            price_sale: $('#price_sale').val(),
+            purchase: $('#purchase').val(),
+            weight: $('#weight').val()
+
+
+
+            /**/
+
+            //descripcion: $('#Descripcion').val(),
+            //precio: $('#Precio').val()
           };
           return registro;
         }
@@ -239,15 +254,23 @@
 
         // funciones para comunicarse con el servidor via ajax
         function agregarRegistro(registro) {
+          console.log("This is the new registro",registro,typeof(registro));
+          //var variable = {nombre:"victor",edad:22};
+          var variable=registro;
+
+
           $.ajax({
             type: 'POST',
-            url: 'datos.php?accion=agregar',
-            data: registro,
+            url: "datos.php?accion=agregar",
+            //data: registro,
+            data: variable,
+            dataType:"json",
             success: function(msg) {
               tabla1.ajax.reload();
+              alert("Satisfactorio");
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema en la función agregarRegistro");
             }
           });
         }
