@@ -26,7 +26,8 @@ switch ($_GET['accion']) {
         break;
 
     case 'borrar':
-        $respuesta = mysqli_query($conexion, "delete from spare_registered where id=$_GET[id]");
+        $sql="DELETE from `spare_registered` where id='$_POST[id]'"; 
+        $respuesta = mysqli_query($conexion, $sql);
         echo json_encode($respuesta);
         break;
 

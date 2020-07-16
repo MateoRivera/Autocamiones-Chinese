@@ -212,7 +212,7 @@
         $('#tablarepuestos tbody').on('click', 'button.botonborrar', function() {
           if (confirm("¿Realmente quiere borrar el artículo?")) {
             let registro = tabla1.row($(this).parents('tr')).data();
-            borrarRegistro(registro.codigo);
+            borrarRegistro(registro.id);
           }
         });
 
@@ -276,15 +276,23 @@
         }
 
         function borrarRegistro(codigo) {
+          var variable={id:codigo};
           $.ajax({
-            type: 'GET',
-            url: 'datos.php?accion=borrar&codigo=' + codigo,
-            data: '',
+
+            type: 'POST',
+            //
+
+            url: 'datos.php?accion=borrar',
+            data: variable,
+            dataType: "json",
+            //
+            /*url: 'datos.php?accion=borrar&codigo='+codigo,
+            data: '',*/
             success: function(msg) {
               tabla1.ajax.reload();
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema en la función borrarRegistro");
             }
           });
         }
