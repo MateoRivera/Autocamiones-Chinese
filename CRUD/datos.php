@@ -50,4 +50,11 @@ switch ($_GET['accion']) {
         $respuesta = mysqli_query($conexion, $sql);
         echo json_encode($respuesta);
         break;
+        
+    case 'ingresar':
+      $sql="SELECT * from `users` where id='$_POST[id]'";
+        $datos = mysqli_query($conexion, $sql);
+        $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
+        echo json_encode($resultado);
+        break;
 }

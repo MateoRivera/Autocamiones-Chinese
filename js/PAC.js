@@ -1,26 +1,25 @@
 // JavaScript Document
 $(document).ready(function(){
-	$('#focusInmediato').popover('show')
-	
-	/*if($('#focusInmediato').is(':focus')){
-		
-			$('#focusInmediato').popover('show')
-			
-		}
-	
-	$('#focusInmediato').blur(function(){
-		$('#focusInmediato').popover('show')
+	$('#ingresarButton').click(function(){
+		comprobarRegistro($('#password').val());
 	})
-	$('#focusInmediato').focus(function(){
-		$('#focusInmediato').popover('show')
-	})
-	*/
-	
-	
-	if(localStorage.getItem("fondoPreferidoAutocamiones")!=null){
-		$("#fondoHome").css("background-image", localStorage.getItem("fondoPreferidoAutocamiones")) 
-	}	
-	
-	
-	
+
+
+	function comprobarRegistro(password){
+		var variable={id:password};
+		$.ajax({
+			type: 'POST',
+			 url: "CRUD/datos.php?accion=ingresar",
+			 data: variable,
+			 dataType:"json",
+			 success: function(msg) {
+              tabla1.ajax.reload();
+            },
+            error: function() {
+              alert("Hay un problema en la función comprobarRegistro");
+            }
+		});
+
+
+	}
 })
