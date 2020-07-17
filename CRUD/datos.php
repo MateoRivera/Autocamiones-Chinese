@@ -32,21 +32,22 @@ switch ($_GET['accion']) {
         break;
 
     case 'consultar':
-        $datos = mysqli_query($conexion, "select * from spare_registered where id=$_GET[id]");
+      $sql="SELECT * from `spare_registered` where id='$_POST[id]'";
+        $datos = mysqli_query($conexion, $sql);
         $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
         echo json_encode($resultado);
         break;
 
     case 'modificar':
-        $respuesta = mysqli_query($conexion, "update spare_registered set
-                                                  id='$_POST[id]',
+        $sql="UPDATE spare_registered set         id='$_POST[id]',
                                                   spare_part_name_es='$_POST[spare_part_name_es]',
                                                   spare_part_name_en='$_POST[spare_part_name_en]',
                                                   stock=$_POST[stock],
                                                   price_sale=$_POST[price_sale],
                                                   purchase=$_POST[purchase],
                                                   weight=$_POST[weight]
-                                               where codigo=$_GET[codigo]");
+                                               where id='$_POST[id]'";
+        $respuesta = mysqli_query($conexion, $sql);
         echo json_encode($respuesta);
         break;
 }

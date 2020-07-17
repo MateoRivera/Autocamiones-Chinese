@@ -239,7 +239,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  padding: 303px 65px 40px 65px;
+  padding: 170px 65px 170px 65px;
 }
 
 .login100-form-title {
@@ -268,7 +268,7 @@ iframe {
 
 .rs1-wrap-input100,
 .rs2-wrap-input100 {
-  width: 50%;
+  width: 100%;
 }
 
 .rs2-wrap-input100 {
@@ -302,6 +302,7 @@ input.input100 {
   left: -1px;
   pointer-events: none;
   border: 1px solid #00ad5f;
+/*  border: 1px solid #FF0004;*/
 
   visibility: hidden;
   opacity: 0;
@@ -356,7 +357,8 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 3px;
-  background: #00ad5f;
+  /*background: #00ad5f;*/
+  background: #00AD7F;
 
   font-family: Montserrat-Bold;
   font-size: 12px;

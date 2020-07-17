@@ -203,10 +203,11 @@
         });
 
         $('#tablarepuestos tbody').on('click', 'button.botonmodificar', function() {
+          $('#id').attr('readonly', true);
           $('#ConfirmarAgregar').hide();
           $('#ConfirmarModificar').show();
           let registro = tabla1.row($(this).parents('tr')).data();
-          recuperarRegistro(registro.codigo);
+          recuperarRegistro(registro.id);
         });
 
         $('#tablarepuestos tbody').on('click', 'button.botonborrar', function() {
@@ -298,18 +299,25 @@
         }
 
         function recuperarRegistro(codigo) {
+          var variable={id:codigo};
           $.ajax({
-            type: 'GET',
-            url: 'datos.php?accion=consultar&codigo=' + codigo,
-            data: '',
+            type: 'POST',
+            url: 'datos.php?accion=consultar',
+            data: variable,
+            dataType: "json",
             success: function(datos) {
-              $('#Codigo').val(datos[0].codigo);
-              $('#Descripcion').val(datos[0].descripcion);
-              $('#Precio').val(datos[0].precio);
+              $('#id').val(datos[0].id);
+              $('#spare_part_name_es').val(datos[0].spare_part_name_es);
+              $('#spare_part_name_en').val(datos[0].spare_part_name_en);
+              $('#stock').val(datos[0].stock);
+              $('#price_sale').val(datos[0].price_sale);
+              $('#purchase').val(datos[0].purchase);
+              $('#weight').val(datos[0].weight);
+
               $("#FormularioArticulo").modal('show');
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema en la función recuperarRegistro");
             }
           });
         }
@@ -317,13 +325,14 @@
         function modificarRegistro(registro) {
           $.ajax({
             type: 'POST',
-            url: 'datos.php?accion=modificar&codigo=' + registro.codigo,
+            url: 'datos.php?accion=modificar',
             data: registro,
+            dataType:"json",
             success: function(msg) {
               tabla1.ajax.reload();
             },
             error: function() {
-              alert("Hay un problema");
+              alert("Hay un problema en la función modificarRegistro");
             }
           });
         }
