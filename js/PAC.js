@@ -1,8 +1,8 @@
 // JavaScript Document
 $(document).ready(function(){
-	$('#ingresarButton').click(function(){
+	/*$('#ingresarButton').click(function(){
 		comprobarRegistro($('#password').val());
-	})
+	})*/
 
 
 	function comprobarRegistro(password){

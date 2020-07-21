@@ -41,26 +41,44 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<!--<form class="login100-form validate-form" action="php/check_login.php" method="post">-->
-				<div class="login100-form validate-form">
+				<form class="login100-form validate-form" action="php/check_login.php" method="post">
 					<span class="login100-form-title p-b-34">
 						<img src="images/logo.png" width="70%">
 						<br>
 						<br>
-						Inventario de repuestos
+						Inventario de repuestos PHP
 					</span>	
 					
 					
 					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Escribe la contraseña">
 						
 						
-						<input autofocus='autofocus' class='input100' type='password' id='password' placeholder='Contraseña' >
-							<span class='focus-input100'></span>
+						<?php
+						
+						if(isset($_GET["fallo"]) && $_GET["fallo"] == 'true'){
+							echo "<input autofocus='autofocus' id='focusInmediato' class='input100' type='password' name='pass' placeholder='Contraseña' data-toggle='popover' data-trigger='focus' title='Contraseña incorrecta' data-content='La contraseña que has introducido no coincide con ninguna cuenta.'>
+							<span class='focus-input100' style='border: 1px solid #FF0004;'></span>";
+							
+						}
+						else{
+							echo "<input autofocus='autofocus' class='input100' type='password' name='pass' placeholder='Contraseña' >
+							<span class='focus-input100'></span>";
+						}
+						?>
 						
 						
 						
 					</div>					
 					
+					<!--<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+						<input id="first-name" class="input100" type="text" name="username" placeholder="User name">
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+						<input class="input100" type="password" name="pass" placeholder="Contraseña">
+						<span class="focus-input100"></span>
+					</div>-->					
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" id="ingresarButton">
@@ -68,8 +86,22 @@
 						</button>
 					</div>
 
-					
-				</div>
+					<!--<div class="w-full text-center p-t-27 p-b-239">
+						<span class="txt1">
+							Forgot
+						</span>
+
+						<a href="#" class="txt2">
+							User name / password?
+						</a>
+					</div>
+
+					<div class="w-full text-center">
+						<a href="#" class="txt3">
+							Sign Up
+						</a>
+					</div>-->
+				</form>
 				
 				<div class="login100-more" style="background-image: url('images/fondo2.jpg');" id="fondoHome"></div>
 			</div>
@@ -82,13 +114,6 @@
 	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-
-
-
-
-
-
-
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->

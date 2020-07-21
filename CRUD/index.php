@@ -1,3 +1,12 @@
+<?php
+session_start();
+ 
+if(!isset($_SESSION['id'])){
+    header('Location: ..');
+    exit;
+} else {
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -169,11 +178,11 @@
           ],
           "columnDefs": [{
             targets: 7,
-            "defaultContent": "<button class='btn btn-sm btn-primary botonmodificar'>Modificar</button>",
+            "defaultContent": "<button class='btn btn-sm btn-primary botonmodificar' style='background-color:#FFD738'>Modificar</button>",
             data: null
           }, {
             targets: 8,
-            "defaultContent": "<button class='btn btn-sm btn-primary botonborrar'>Borrar</button>",
+            "defaultContent": "<button class='btn btn-sm btn-primary botonborrar' style='background-color:#FF4B4B'>Borrar</button>",
             data: null
           }],
           "language": {
@@ -340,6 +349,13 @@
       });
     </script>
 
+
+
 </body>
 
 </html>
+
+<?php
+
+}
+?>
